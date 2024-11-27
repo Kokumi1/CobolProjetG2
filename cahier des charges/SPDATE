@@ -1,0 +1,95 @@
+000100 IDENTIFICATION DIVISION.                                         00010000
+000200 PROGRAM-ID. SPDATE.                                              00020000
+000300                                                                  00030000
+000400 ENVIRONMENT DIVISION.                                            00040000
+000500 CONFIGURATION SECTION.                                           00050000
+000600 SPECIAL-NAMES.                                                   00060000
+000700     DECIMAL-POINT IS COMMA.                                      00070000
+000800          
+001800 DATA DIVISION.                                                   00190000
+002000 
+002400                                                                  00240000
+002500 WORKING-STORAGE SECTION.                                         00250000
+002600 
+        01 WS-DATEFORMAT.
+           05 WS-AA   PIC XX.
+           05 WS-MM   PIC XX.
+           05 WS-JJ   PIC XX.
+        77 WS-DAY-OF-THE-WEEK PIC 9.
+        
+        77 WS-STRING-MONTH PIC X(10).
+        77 WS-STRING-DAY   PIC X(10).
+003810
+       LINKAGE SECTION.
+        77 LS-DATE         PIC X(30).
+
+
+        
+
+003900 PROCEDURE DIVISION USING LS-DATE.
+
+           ACCEPT WS-DATEFORMAT FROM DATE
+           ACCEPT WS-DAY-OF-THE-WEEK FROM DAY-OF-WEEK
+           
+           PERFORM GET-DAY
+           PERFORM GET-MONTH
+
+           STRING WS-STRING-DAY DELIMITED BY SPACE
+                  ' '  DELIMITED BY SIZE
+                  WS-JJ DELIMITED BY SIZE
+                  ' '  DELIMITED BY SIZE
+                  WS-STRING-MONTH DELIMITED BY SPACE
+                  ' 20' DELIMITED BY SIZE
+                  WS-AA DELIMITED BY SIZE
+                  INTO LS-DATE
+           END-STRING
+           
+
+005600     GOBACK.
+
+       GET-DAY.
+           EVALUATE TRUE
+           WHEN WS-DAY-OF-THE-WEEK = 1
+              MOVE 'LUNDI' TO WS-STRING-DAY
+           WHEN WS-DAY-OF-THE-WEEK = 2
+              MOVE 'MARDI' TO WS-STRING-DAY
+           WHEN WS-DAY-OF-THE-WEEK = 3
+              MOVE 'MERCREDI' TO WS-STRING-DAY
+           WHEN WS-DAY-OF-THE-WEEK = 4
+              MOVE 'JEUDI' TO WS-STRING-DAY
+           WHEN WS-DAY-OF-THE-WEEK = 5
+              MOVE 'VENDREDI' TO WS-STRING-DAY
+           WHEN WS-DAY-OF-THE-WEEK = 6
+              MOVE 'SAMEDI' TO WS-STRING-DAY
+           WHEN WS-DAY-OF-THE-WEEK = 7
+              MOVE 'DIMANCHE' TO WS-STRING-DAY
+                  
+           .
+005610     
+       GET-MONTH.
+           EVALUATE TRUE
+           WHEN WS-MM = '01'
+                  MOVE 'JANVIER' TO WS-STRING-MONTH
+           WHEN WS-MM = '02'
+                  MOVE 'FEVRIER' TO WS-STRING-MONTH
+           WHEN WS-MM = '03'
+                  MOVE 'MARS' TO WS-STRING-MONTH
+           WHEN WS-MM = '04'
+                  MOVE 'AVRIL' TO WS-STRING-MONTH
+           WHEN WS-MM = '05'
+                  MOVE 'MAI' TO WS-STRING-MONTH
+           WHEN WS-MM = '06'
+                  MOVE 'JUIN' TO WS-STRING-MONTH
+           WHEN WS-MM = '07'
+                  MOVE 'JUILLET' TO WS-STRING-MONTH
+           WHEN WS-MM = '08'
+                  MOVE 'AOUT' TO WS-STRING-MONTH
+           WHEN WS-MM = '09'
+                  MOVE 'SEPTEMBRE' TO WS-STRING-MONTH
+           WHEN WS-MM = '10'
+                  MOVE 'OCTOBRE' TO WS-STRING-MONTH
+           WHEN WS-MM = '11'
+                  MOVE 'NOVEMBRE' TO WS-STRING-MONTH
+           WHEN WS-MM = '12'
+                  MOVE 'DECEMBRE' TO WS-STRING-MONTH
+           .
