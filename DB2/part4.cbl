@@ -27,7 +27,7 @@
 001893                                                                  00189300
 001894*****************************************                         00189413
 001895*** REQUETE POUR RECUPERER LES PRODUITS                           00189547
-001896*** PAR QUANTITÈ VENDUE DÈCROISSANTE                              00189647
+001896*** PAR QUANTIT√© VENDUE D√©CROISSANTE                              00189647
 001897*****************************************                         00189747
 001898     EXEC SQL                                                     00189847
 001899        DECLARE CXML CURSOR                                       00189947
